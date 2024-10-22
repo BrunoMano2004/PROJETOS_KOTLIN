@@ -1,11 +1,23 @@
 package main
 
 import model.LoginDto
-import service.ConsumoApiService
+import service.ApiService
+import service.LoginService
+import view.PrincipalView
+import java.util.Scanner
 
 fun main(){
+    val scan = Scanner(System.`in`)
+    val loginService = LoginService()
 
-    val login = LoginDto("brunomano2004@gmail.com", "Bruno@8401")
+    println("Digite seu username: ")
+    val username = scan.nextLine()
 
-    println(ConsumoApiService.autenticar(login))
+    println("Digite sua senha: ")
+    val senha = scan.nextLine()
+
+    val token = loginService.realizarLogin(LoginDto(username, senha))
+
+    PrincipalView.menu(scan, token)
+
 }
